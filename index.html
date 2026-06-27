@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据采集技术 - 考前冲刺</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- 首页 -->
+        <div id="home-screen" class="screen active">
+            <div class="hero">
+                <div class="hero-glow"></div>
+                <h1 class="hero-title">
+                    <span class="gradient-text">数据采集技术</span>
+                    <br>考前冲刺
+                </h1>
+                <p class="hero-subtitle">智能学习系统 · 重点突破</p>
+                <div class="stats-bar">
+                    <div class="stat-item">
+                        <span class="stat-num" id="total-progress">0%</span>
+                        <span class="stat-label">学习进度</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mode-grid">
+                <div class="mode-card" onclick="startMode('choice')">
+                    <div class="mode-icon">ABCD</div>
+                    <div class="mode-info">
+                        <h3>单选题</h3>
+                    </div>
+                    <div class="mode-progress" id="choice-progress">
+                        <div class="progress-bar"><div class="progress-fill" id="choice-fill"></div></div>
+                    </div>
+                </div>
+                <div class="mode-card" onclick="startMode('judge')">
+                    <div class="mode-icon">✓✗</div>
+                    <div class="mode-info">
+                        <h3>判断题</h3>
+                    </div>
+                    <div class="mode-progress" id="judge-progress">
+                        <div class="progress-bar"><div class="progress-fill" id="judge-fill"></div></div>
+                    </div>
+                </div>
+                <div class="mode-card" onclick="startMode('multiple')">
+                    <div class="mode-icon">☑☑</div>
+                    <div class="mode-info">
+                        <h3>多选题</h3>
+                    </div>
+                    <div class="mode-progress" id="multiple-progress">
+                        <div class="progress-bar"><div class="progress-fill" id="multiple-fill"></div></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-outline btn-lg" onclick="startMode('bookmark')">
+                    ⭐ 收藏题目 <span id="bookmark-count-badge" class="badge">0</span>
+                </button>
+            </div>
+            <button class="btn btn-ghost" onclick="resetAll()">🔄 重置所有数据</button>
+        </div>
+
+        <!-- 答题页面 -->
+        <div id="quiz-screen" class="screen">
+            <div class="quiz-header">
+                <button class="btn-back" onclick="goHome()">← 返回</button>
+                <div class="quiz-progress-info">
+                    <span id="quiz-current">1</span> / <span id="quiz-total">0</span>
+                </div>
+                <div class="quiz-actions">
+                    <button class="btn-icon" id="bookmark-btn" onclick="toggleBookmark()">☆</button>
+                </div>
+            </div>
+
+            <div class="quiz-progress-bar">
+                <div class="quiz-progress-fill" id="quiz-progress-fill"></div>
+            </div>
+
+            <div class="quiz-body">
+                <div class="question-type-badge" id="question-type-badge"></div>
+                <div class="question-text" id="question-text"></div>
+
+                <div id="judge-options" class="options-container" style="display:none;">
+                    <button class="option-btn judge-btn correct-opt" onclick="selectJudge(true)">✓ 正确</button>
+                    <button class="option-btn judge-btn wrong-opt" onclick="selectJudge(false)">✗ 错误</button>
+                </div>
+
+                <div id="choice-options" class="options-container" style="display:none;"></div>
+                
+                <div id="multiple-options" class="options-container" style="display:none;">
+                    <div id="multiple-btns" class="options-container"></div>
+                    <button class="btn btn-primary" id="multiple-submit" onclick="submitMultiple()">确认答案</button>
+                </div>
+
+                <div id="answer-section" class="answer-section" style="display:none;">
+                    <div class="answer-result" id="answer-result"></div>
+                    <div class="answer-correct" id="answer-correct"></div>
+                    <button class="btn btn-primary btn-lg" id="next-btn" onclick="nextQuestion()">下一题 →</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 结果页面 -->
+        <div id="result-screen" class="screen">
+            <div class="result-content">
+                <div class="result-emoji" id="result-emoji">🎉</div>
+                <h2 class="result-title" id="result-title">练习完成！</h2>
+                <div class="result-actions">
+                    <button class="btn btn-primary btn-lg" onclick="goHome()">返回首页</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
